@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
-import requests
-import io
+from sklearn import datasets
 from sklearn.ensemble import RandomForestClassifier
 
 st.write("""
@@ -29,14 +28,9 @@ df = user_input_features()
 st.subheader('User Input parameters')
 st.write(df)
 
-url = "https://raw.githubusercontent.com/fqlim/streamlit-example/master/iris.csv" # Make sure the url is the raw version of the file on GitHub
-download = requests.get(url).content
-# Reading the downloaded content and turning it into a pandas dataframe
-
-iris = pd.read_csv(io.StringIO(download.decode('utf-8')))
-X = iris.drop(['A'], axis=1)
-Y = iris['species']
-
+iris = datasets.load_iris()
+X = iris.data
+Y = iris.target
 
 clf = RandomForestClassifier()
 clf.fit(X, Y)
@@ -45,10 +39,15 @@ prediction = clf.predict(df)
 prediction_proba = clf.predict_proba(df)
 
 st.subheader('Class labels and their corresponding index number')
-st.write(iris.species)
+st.write(iris.target_names)
 
 st.subheader('Prediction')
 st.write(prediction)
 
 st.subheader('Prediction Probability')
 st.write(prediction_proba)
+
+from PIL import Image
+image = Image.open('iris-machinelearning.png')
+
+st.image(image, caption='Iris')
