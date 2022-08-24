@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import requests
+import io
 from sklearn.ensemble import RandomForestClassifier
 
 st.write("""
