@@ -22,7 +22,7 @@ def user_input_features():
     features = pd.DataFrame(data, index=[0])
     return features
 
-url = "https://github.com/fqlim/streamlit-example/blob/master/iris.csv" # Make sure the url is the raw version of the file on GitHub
+url = "https://raw.githubusercontent.com/fqlim/streamlit-example/master/iris.csv" # Make sure the url is the raw version of the file on GitHub
 download = requests.get(url).content
 # Reading the downloaded content and turning it into a pandas dataframe
 
