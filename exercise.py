@@ -34,8 +34,8 @@ download = requests.get(url).content
 # Reading the downloaded content and turning it into a pandas dataframe
 
 iris = pd.read_csv(io.StringIO(download.decode('utf-8')))
-X = iris.data
-Y = iris.target
+X = iris.drop(['A'], axis=1)
+Y = iris['species']
 
 
 clf = RandomForestClassifier()
